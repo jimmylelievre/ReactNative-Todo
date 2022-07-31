@@ -44,17 +44,20 @@ export default function App() {
             {/* This is where the tasks will go! */}
             {taskItems.map((item, index) => {
               return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => completeTask(index)}
-                >
-                  <Task text={item} />
+                <TouchableOpacity key={index}>
+                  <Task
+                    text={item}
+                    taskItems={taskItems}
+                    index={index}
+                    setTaskItems={setTaskItems}
+                  />
                 </TouchableOpacity>
               );
             })}
           </View>
         </View>
       </ScrollView>
+
       {/* Write a task */}
       {/* Uses a keyboard avoiding view which ensures the keyboard does not cover the items on screen */}
       <KeyboardAvoidingView

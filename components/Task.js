@@ -1,14 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const Task = ({ text }) => {
+const Task = ({ text, index, taskItems, setTaskItems }) => {
+  const completeTask = (index) => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
+  };
+
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <View style={styles.square}></View>
         <Text style={styles.itemText}>{text}</Text>
       </View>
-      <View style={styles.circular}></View>
+      <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+        <View style={styles.circular}></View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -40,11 +48,11 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
   },
   circular: {
-    width: 12,
-    height: 12,
+    width: 20,
+    height: 20,
     borderColor: "#55BCF6",
     borderWidth: 2,
-    borderRadius: 5,
+    borderRadius: 15,
   },
 });
 
