@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const Task = ({ text, index, taskItems, setTaskItems }) => {
-  const completeTask = (index) => {
+  const deleteTask = (index) => {
     let itemsCopy = [...taskItems];
     itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
@@ -14,7 +14,7 @@ const Task = ({ text, index, taskItems, setTaskItems }) => {
         <View style={styles.square}></View>
         <Text style={styles.itemText}>{text}</Text>
       </View>
-      <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+      <TouchableOpacity key={index} onPress={() => deleteTask(index)}>
         <View style={styles.circular}></View>
       </TouchableOpacity>
     </View>

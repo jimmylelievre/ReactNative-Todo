@@ -12,19 +12,37 @@ import {
 import Task from "./components/Task";
 
 export default function App() {
-  const [task, setTask] = useState();
+  const [task, setTask] = useState("");
   const [taskItems, setTaskItems] = useState([]);
+  const [taskComplete, setTaskComplete] = useState([]);
 
-  const handleAddTask = () => {
-    Keyboard.dismiss();
-    setTaskItems([...taskItems, task]);
-    setTask(null);
-  };
-
-  const completeTask = (index) => {
+  const deleteTask = (index, item) => {
     let itemsCopy = [...taskItems];
     itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
+    completeTask(item);
+  };
+  const deleteTaskComplete = (index, item) => {
+    let itemsCopy = [item, ...taskItems];
+    let itemsCopyComplete = [...taskComplete];
+    setTaskItems(itemsCopy);
+    itemsCopyComplete.splice(index, 1);
+    setTaskComplete(itemsCopyComplete);
+  };
+
+  const handleAddTask = () => {
+    Keyboard.dismiss();
+    if (task == "") {
+    } else {
+      setTaskItems([...taskItems, task]);
+    }
+    setTask("");
+  };
+
+  const completeTask = (item) => {
+    let itemsCopy = [item, ...taskComplete];
+
+    setTaskComplete(itemsCopy);
   };
 
   return (
@@ -44,7 +62,32 @@ export default function App() {
             {/* This is where the tasks will go! */}
             {taskItems.map((item, index) => {
               return (
-                <TouchableOpacity key={index}>
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => deleteTask(index, item)}
+                >
+                  <Task
+                    text={item}
+                    taskItems={taskItems}
+                    index={index}
+                    setTaskItems={setTaskItems}
+                  />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+        {/* Tasks complete*/}
+        <View style={styles.tasksWrapperComplete}>
+          <Text style={styles.sectionTitle}>Tasks complete</Text>
+          <View style={styles.items}>
+            {/* This is where the tasks will go! */}
+            {taskComplete.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => deleteTaskComplete(index, item)}
+                >
                   <Task
                     text={item}
                     taskItems={taskItems}
@@ -87,6 +130,10 @@ const styles = StyleSheet.create({
   },
   tasksWrapper: {
     paddingTop: 100,
+    paddingHorizontal: 20,
+  },
+  tasksWrapperComplete: {
+    paddingTop: 10,
     paddingHorizontal: 20,
   },
   sectionTitle: {
