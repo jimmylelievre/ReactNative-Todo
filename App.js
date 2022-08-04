@@ -22,7 +22,7 @@ export default function App() {
     setTaskItems(itemsCopy);
     completeTask(item);
   };
-  const deleteTaskComplete = (index, item) => {
+  const deleteTaskCompleted = (index, item) => {
     let itemsCopy = [item, ...taskItems];
     let itemsCopyComplete = [...taskComplete];
     setTaskItems(itemsCopy);
@@ -86,7 +86,7 @@ export default function App() {
               return (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => deleteTaskComplete(index, item)}
+                  onPress={() => deleteTaskCompleted(index, item)}
                 >
                   <Task
                     text={item}
@@ -150,6 +150,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   input: {
     paddingVertical: 15,
@@ -158,7 +160,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     borderColor: "#C0C0C0",
     borderWidth: 1,
-    width: 250,
+    width: 200,
   },
   addWrapper: {
     width: 60,
