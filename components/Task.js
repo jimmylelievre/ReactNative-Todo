@@ -1,22 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-const Task = ({ text, index, taskItems, setTaskItems }) => {
-  const deleteTask = (index) => {
-    let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy);
-  };
-
+const Task = ({ style, text }) => {
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <Text style={styles.itemText}>{text}</Text>
+        <View style={style ? styles.circularComplete : styles.circular}></View>
+        {/* <View style={styles.square}></View> */}
+        <Text style={style ? styles.tasksComplete : styles.itemText}>
+          {text}
+        </Text>
       </View>
-      <TouchableOpacity key={index} onPress={() => deleteTask(index)}>
-        <View style={styles.circular}></View>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -30,7 +24,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 20,
+    width: 290,
   },
+  items: {
+    flexDirection: "row",
+  },
+
   itemLeft: {
     flexDirection: "row",
     alignItems: "center",
@@ -48,11 +47,24 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
   },
   circular: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
     borderColor: "#55BCF6",
     borderWidth: 2,
     borderRadius: 15,
+    marginRight: 10,
+  },
+  tasksComplete: {
+    textDecorationLine: "line-through",
+  },
+  circularComplete: {
+    width: 15,
+    height: 15,
+    borderColor: "#55BCF6",
+    backgroundColor: "#55BCF6",
+    borderWidth: 2,
+    borderRadius: 15,
+    marginRight: 10,
   },
 });
 
