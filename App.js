@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -11,6 +12,7 @@ import {
   Modal,
   Pressable,
 } from "react-native";
+import Delete from "./components/Delete";
 import Task from "./components/Task";
 
 export default function App() {
@@ -80,7 +82,7 @@ export default function App() {
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
           <View style={styles.sectionTitle}>
-            <Text style={styles.title}>Today's tasks</Text>
+            <Text style={styles.title}>Tâches du jours</Text>
             <Text
               style={styles.delete}
               onPress={() => setModalVisible(!modalVisible)}
@@ -102,7 +104,7 @@ export default function App() {
                     style={styles.deleteIcon}
                     onPress={() => deleteTask(index)}
                   >
-                    ❌
+                    <Delete />
                   </Text>
                 </TouchableOpacity>
               );
@@ -113,9 +115,10 @@ export default function App() {
         <View style={styles.tasksWrapperComplete}>
           {taskComplete.length >= 1 ? (
             <View>
-              <Text style={styles.title}>Tasks complete</Text>
+              <Text style={styles.title}>Tâches terminées</Text>
               <Text style={styles.tagline}>
-                Click on the todo to up it in the task's today{" "}
+                Clique sur la tâche souhaitée pour la remètre dans tâches du
+                jours{" "}
               </Text>
             </View>
           ) : (
@@ -132,17 +135,19 @@ export default function App() {
                   onPress={() => reloadTaskCompleted(index, item)}
                 >
                   <Task style="tasksComplete" text={item} />
+
                   <Text
                     style={styles.deleteIcon}
                     onPress={() => deleteTaskCompleted(index)}
                   >
-                    ❌
+                    <Delete />
                   </Text>
                 </TouchableOpacity>
               );
             })}
           </View>
         </View>
+        {/* Modal */}
         <View>
           <Modal
             animationType="slide"
@@ -158,18 +163,20 @@ export default function App() {
                 <Text style={styles.modalText}>
                   Are you sure to want remove duplicates ?
                 </Text>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => removeDuplicates()}
-                >
-                  <Text style={styles.textStyle}>Delete</Text>
-                </Pressable>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Cancel</Text>
-                </Pressable>
+                <View style={styles.buttonsModal}>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => removeDuplicates()}
+                  >
+                    <Text style={styles.textStyle}>Delete</Text>
+                  </Pressable>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Cancel</Text>
+                  </Pressable>
+                </View>
               </View>
             </View>
           </Modal>
@@ -184,7 +191,7 @@ export default function App() {
       >
         <TextInput
           style={styles.input}
-          placeholder={"Write a task"}
+          placeholder={"Ajoutez une tâche"}
           value={task}
           onChangeText={(text) => setTask(text)}
         />
@@ -201,7 +208,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E8EAED",
+    backgroundColor: "#E6F2F7",
   },
   tasksWrapper: {
     paddingTop: 100,
@@ -217,8 +224,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: "bold",
+    color: "#5E5E5E",
+  },
+  tagline: {
+    fontSize: 11,
+    color: "#5E5E5E",
   },
   items: {
     marginTop: 30,
@@ -244,7 +256,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 15,
     backgroundColor: "#FFF",
-    borderRadius: 60,
+    borderRadius: 6,
     borderColor: "#C0C0C0",
     borderWidth: 1,
     width: 200,
@@ -253,13 +265,16 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     backgroundColor: "#FFF",
-    borderRadius: 60,
+    border: 1,
+    borderRadius: 6,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#C0C0C0",
     borderWidth: 1,
   },
-  addText: {},
+  addText: {
+    fontSize: 20,
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -282,9 +297,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
     elevation: 2,
+    marginLeft: 10,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -300,5 +316,10 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  buttonsModal: {
+    flexDirection: "row",
+
+    alignItems: "center",
   },
 });
