@@ -82,7 +82,7 @@ export default function App() {
         {/* Today's Tasks */}
         <View style={styles.tasksWrapper}>
           <View style={styles.sectionTitle}>
-            <Text style={styles.title}>Tâches du jours</Text>
+            <Text style={styles.title}>Tâches du jour</Text>
             <Text
               style={styles.delete}
               onPress={() => setModalVisible(!modalVisible)}
@@ -117,8 +117,8 @@ export default function App() {
             <View>
               <Text style={styles.title}>Tâches terminées</Text>
               <Text style={styles.tagline}>
-                Clique sur la tâche souhaitée pour la remètre dans tâches du
-                jours{" "}
+                Cliquez sur la tâche souhaitée pour la remettre dans tâches du
+                jour{" "}
               </Text>
             </View>
           ) : (
