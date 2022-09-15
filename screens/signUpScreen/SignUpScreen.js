@@ -9,23 +9,30 @@ import {
   View,
 } from "react-native";
 
-export default function SingInScreen() {
+export default function SingUpScreen() {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.title}>Connexion</Text>
+        <Text style={styles.title}>Inscription</Text>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <TextInput style={styles.item} placeholder={"Nom"} />
+          <TextInput style={styles.item} placeholder={"Email"} />
           <TextInput style={styles.item} placeholder={"Mot de passe"} />
+          <TextInput
+            style={styles.item}
+            placeholder={"Confirmer le mot de passe"}
+          />
         </KeyboardAvoidingView>
       </View>
-      <Text style={styles.text}>Mot de passe perdu ?</Text>
+
       <TouchableOpacity>
         <View style={styles.button}>
-          <Text style={styles.textButton}>Se connecter</Text>
+          <Text style={styles.textButton}>S'inscrire</Text>
         </View>
+        <Text style={styles.text}>
+          Vous avez déjà un compte ? Connectez -vous ici !
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -54,8 +61,10 @@ const styles = StyleSheet.create({
     color: "#5E5E5E",
   },
   text: {
-    color: "#5E5E5E",
-    textAlign: "right",
+    color: "rgba(172, 172, 172, 1)",
+    textAlign: "center",
+    marginTop: 10,
+    fontSize: 13,
   },
   textButton: {
     color: "white",
