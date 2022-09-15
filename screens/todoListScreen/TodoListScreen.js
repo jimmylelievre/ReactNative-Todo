@@ -6,12 +6,13 @@ import ListIcon from "../../components/ListIcon";
 
 export default function TodoListScreen() {
   return (
+    /* Title */
     <View style={styles.container}>
       <View style={styles.containerTitle}>
         <Text style={styles.title}>Listes Todo</Text>
         <Text style={styles.title}>+</Text>
       </View>
-
+      {/* todo list */}
       <View style={styles.containerTodo}>
         <View style={styles.item}>
           <View style={styles.itemLeft}>
@@ -19,7 +20,9 @@ export default function TodoListScreen() {
             <Text style={styles.listContent}>pain</Text>
           </View>
         </View>
-        <Delete />
+        <View style={styles.deleteIcon}>
+          <Delete />
+        </View>
       </View>
 
       <View style={styles.containerTodo}>
@@ -29,7 +32,7 @@ export default function TodoListScreen() {
             <Text style={styles.listContent}>pain</Text>
           </View>
         </View>
-        <View>
+        <View style={styles.deleteIcon}>
           <Delete />
         </View>
       </View>
@@ -47,9 +50,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   containerTodo: {
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
+    marginTop: 5,
+    marginLeft: 30,
+    marginRight: 30,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
@@ -64,7 +67,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderRadius: 6,
     flexDirection: "row",
-
     marginBottom: 10,
     width: "100%",
     height: 40,
@@ -83,5 +85,9 @@ const styles = StyleSheet.create({
   },
   addIcon: {
     fontSize: 20,
+  },
+  deleteIcon: {
+    marginLeft: 30,
+    marginBottom: 10,
   },
 });
